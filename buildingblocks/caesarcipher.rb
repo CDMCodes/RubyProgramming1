@@ -6,24 +6,23 @@ def caesar_cipher(sentence, shift)
   #Create empty array for results, and split input sentence
   results = []
   letters = sentence.split(//)
-  #puts letters
+
   #loop through letters, shifting letters and just adding non-letters
   letters.each do |l|
     if (lowers.index(l) != nil)
       start = lowers.index(l)
-      #puts "lowers at index #{start}"
       stop = (start + shift) % 26
       results << lowers[stop]
     elsif (uppers.index(l) != nil)
       start = uppers.index(l)
-      #puts "uppers at index #{start}"
       stop = (start + shift) % 26
       results << uppers[stop]
     else
-      #puts "#{l} is not  a letter"
       results << l
     end
   end
+  
+#recombine results array into a single string
 results = results.join
 puts results
 end
