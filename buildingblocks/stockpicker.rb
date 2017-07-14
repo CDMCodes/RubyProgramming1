@@ -1,22 +1,22 @@
-def stockpicker(daysarr)
+def stockpicker2(daysarr)
 
-  pick = {"low" => daysarr.sort[0],
-    "lowday" => nil,
-    "high" => daysarr.sort[-1],
-    "highday" => nil}
+  dayarr = []
+  diffarr = []
 
-  daysarr.each_with_index do |val, index|
-    #if number is smaller than initial, replace it
-    if val <= pick["low"]
-      pick["low"] = val
-      pick["lowday"] = index
-    else val >= pick["high"]
-      pick["high"] = val
-      pick["highday"] = index
+  for i in 0...daysarr.length-1
+    # puts i
+    # puts daysarr[i]
+    for j in i+1...daysarr.length-1
+      diff = daysarr[j] - daysarr[i]
+      subarr = [i, j]
+      dayarr << subarr
+      diffarr << diff
     end
   end
-  puts "Low day = #{pick["lowday"]},  High day = #{pick["highday"]}"
+  best = diffarr.index(diffarr.max)
+  days = dayarr[best]
+  puts "Buy on #{days[0]} sell on #{days[1]}"
+
 end
 
-
-stockpicker([17,3,6,9,15,8,6,1,10])
+stockpicker2([17,3,6,9,15,8,6,1,10])
