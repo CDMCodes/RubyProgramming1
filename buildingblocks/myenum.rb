@@ -34,15 +34,51 @@ module Enumerable
   end
 
   def my_all?
+    if block_given?
+      if self.my_select{|n| yield(n)}.length == self.length
+        return true
+      else
+        return false
+      end
+    else
+      return self
+    end
   end
 
   def my_any?
+    if block_given?
+      if self.my_select{|n| yield(n)}.length >= 1
+        return true
+      else
+        return false
+      end
+    else
+      return self
+    end
   end
 
   def my_none?
+    if block_given?
+      if self.my_select{|n| yield(n)}.length == 0
+        return true
+      else
+        return false
+      end
+    else
+      return self
+    end
   end
 
-  def my_count
+  def my_count(val = 0)
+    if block_given?
+      self.my_select{|n| yield(n)}.length
+    else
+      if val > 0
+        self.my_select{|n| n == val}.length
+      else
+        self.length
+      end
+    end
   end
 
   def my_map
